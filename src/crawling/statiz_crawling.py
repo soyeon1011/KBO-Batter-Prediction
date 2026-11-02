@@ -22,7 +22,7 @@ all_data = [] # 10개 구단 데이터를 모두 담을 큰 바구니
 
 for team_name in teams:
     # 소연님이 저장한 HTML 파일 경로 (예: 2023_LG.html)
-    html_file_path = f"/Users/soyeon/Documents/Capstone/data/html/{target_year}_{team_name}.html"
+    html_file_path = f"/Users/soyeon/Documents/GitHub/KBO-Batter-Prediction/data/html/{target_year}_{team_name}.html"
 
     # 파일이 없으면 에러 내지 않고 부드럽게 패스!
     if not os.path.exists(html_file_path):
@@ -74,7 +74,7 @@ final_df = pd.concat(all_data, ignore_index=True)
 name_col = '이름' if '이름' in final_df.columns else 'Name'
 final_df = final_df.drop_duplicates(subset=['연도', name_col, '팀명_스탯티즈'], keep='first')
 
-save_path = f"/Users/soyeon/Documents/Capstone/data/statiz_advanced_stats_{target_year}.csv"
+save_path = f"/Users/soyeon/Documents/GitHub/KBO-Batter-Prediction/data/statiz_advanced_stats_{target_year}.csv"
 final_df.to_csv(save_path, index=False, encoding='utf-8-sig')
 
 print(f"\n🎉 대성공!! 10개 구단 총 [{len(final_df)}명]의 데이터를 '{save_path}' 파일 하나로 완벽하게 합쳤습니다!")

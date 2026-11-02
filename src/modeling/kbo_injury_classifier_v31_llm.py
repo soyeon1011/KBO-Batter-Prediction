@@ -16,7 +16,7 @@ from google import genai
 # ─────────────────────────────────────────────────────────────────────────────
 # 설정
 # ─────────────────────────────────────────────────────────────────────────────
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyA2KE4q6ouRTHYmpU42O7sVdOVAx1BhdXk")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "apikey")
 
 DATA_DIR     = "/Users/soyeon/Documents/Capstone/data"
 INPUT_FILE   = os.path.join(DATA_DIR, "kbo_injury_final_classified_v30_master.csv")

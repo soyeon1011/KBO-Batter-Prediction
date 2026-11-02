@@ -103,8 +103,8 @@ def extract_days(text):
 
 roster_df['부상_일수_텍스트'] = roster_df['비고'].apply(extract_days)
 
-# 6. 파일 저장 (이름을 injury_list에서 roster_moves로 살짝 변경 추천)
-save_path = f"/Users/soyeon/Documents/Capstone/data/kbo_roster_moves_{target_year}.csv"
+# 6. 파일 저장
+save_path = f"/Users/soyeon/Documents/Capstone/data/kbo_injury_list_{target_year}.csv"
 roster_df.to_csv(save_path, index=False, encoding='utf-8-sig')
 
 print(f"\n🎉 완벽하게 성공! 총 [{len(roster_df)}건]의 1군 등록/말소 데이터가 저장되었습니다.")

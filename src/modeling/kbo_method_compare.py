@@ -50,8 +50,9 @@ STAT_FEATURES = [
     'BB/K', '데뷔연차', 'Age_2026', 'Park_Factor',
 ]
 INJURY_FEATURES_A_C = [
-    '부상발생여부', '부상횟수', '총결장일수', '최대심각도', '최고신뢰도점수',
+    '부상발생여부', '부상횟수', '총결장일수', '평균심각도', '최고신뢰도점수',
 ]
+INJURY_FEATURES_A = ['부상발생여부', '부상횟수', '총결장일수', '최대심각도', '최고신뢰도점수']
 INJURY_FEATURES_B = [
     '부상발생여부', '부상횟수', '최대결장일수', '최대심각도', '최고신뢰도점수',
 ]
@@ -89,6 +90,10 @@ def evaluate(name, df, injury_feat):
 
     X_train, y_train = prepare_xy(train, injury_feat)
     X_valid, y_valid = prepare_xy(valid, injury_feat)
+    # 수정: 검증 세트의 범주 코드를 학습 세트 기준으로 다시 인코딩
+    from sklearn.preprocessing import LabelEncoder as _LE
+    _le = _LE().fit(train['대표부상분류'].astype(str))
+    X_valid['대표부상분류'] = _le.transform(valid['대표부상분류'].astype(str))
 
     models = {
         'RandomForest':     RandomForestRegressor(n_estimators=200, random_state=42),
@@ -139,6 +144,8 @@ def main():
         # 방법 B는 컬럼명이 다름
         if 'B' in method_name:
             injury_feat = INJURY_FEATURES_B
+        elif 'A' in method_name:
+            injury_feat = INJURY_FEATURES_A
         else:
             injury_feat = INJURY_FEATURES_A_C
 
